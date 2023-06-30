@@ -292,22 +292,13 @@ class SlymeDriver(ChatMain, ChatSidebar):
                     sec=1, split_len=128):
 
         field = self.driver.find_element(type, name)
-
-        # if len(input) > split_len:
-        #     substr_list = []
-        #     while len(input) > split_len:
-        #         substr = input[:split_len]
-        #         substr_list.append(substr)
-        #         input = input[split_len:]
-            
-        #     substr_list.append(input)
-        #     for substr in substr_list:
-        #         field.send_keys(substr)
-        # else:
-        #     field.send_keys(input) 
+        button = self.driver.find_element(By.XPATH, '//*[@id="__next"]/div[1]/div[2]/div/main/div[3]/form/div/div/button')
 
         self.driver.execute_script("arguments[0].value = arguments[1]", field, input)
         field.send_keys(Keys.ENTER)
+        time.sleep(1)
+        print(button)
+        button.click()
 
         char_limited_input = char_limiter(input)
 
